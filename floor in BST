@@ -1,0 +1,34 @@
+void inorder(TreeNode<int>*root,vector<int>&ans){
+    if(root==nullptr){
+        return ;
+    }
+    inorder(root->left,ans);
+    ans.push_back(root->val);
+    inorder(root->right,ans);
+}
+ 
+int floorInBST(TreeNode<int> * root, int X)
+{ 
+    vector<int>ans;
+    inorder(root,ans);
+    int left=0;
+    int right=ans.size()-1;
+    int result=-1;
+   while(left<=right){
+       int mid=left+(right-left)/2;
+       int ele=ans[mid];
+       if(ele==X){
+           return ele;
+       }
+       else if(ele<X){
+           result=ele;
+           left=mid+1;
+
+       }
+       else{
+           right=mid-1;
+       }
+       
+   }
+   return result;
+}
